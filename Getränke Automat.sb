@@ -1,0 +1,227 @@
+GraphicsWindow.Title = "Der Getränkeautomat Simulator 2024"
+GraphicsWindow.Height = 600
+GraphicsWindow.Width = 740
+GraphicsWindow.Top = 200
+GraphicsWindow.Left = 500
+
+Getränk = 0
+Zero()
+
+Controls.ButtonClicked = Auswahl 
+
+GraphicsWindow.BrushColor = "Black"
+E[2] = Controls.AddButton("2€", 440, 150)
+E[1] = Controls.AddButton("1€", 520, 150)
+E[50] = Controls.AddButton("0,50€", 600, 150)
+E[20] = Controls.AddButton("0,20€", 440, 250)
+E[10] = Controls.AddButton("0,10€", 520, 250)
+E[5] = Controls.AddButton("0,05€", 600, 250)
+
+Controls.SetSize(E[2], 40, 25)
+Controls.SetSize(E[1], 40, 25)
+Controls.SetSize(E[50], 50, 25)
+Controls.SetSize(E[20], 50, 25)
+Controls.SetSize(E[10], 50, 25)
+Controls.SetSize(E[5], 50, 25)
+
+G[1] = Controls.AddButton("T1", 140, 161)
+G[2] = Controls.AddButton("T2", 225, 161)
+G[3] = Controls.AddButton("T3", 305, 161)
+G[4] = Controls.AddButton("T4", 140, 241)
+G[5] = Controls.AddButton("T5", 225, 241)
+G[6] = Controls.AddButton("T6", 305, 241)
+
+Controls.SetSize(G[1], 35, 25)
+Controls.SetSize(G[2], 35, 25)
+Controls.SetSize(G[3], 35, 25)
+Controls.SetSize(G[4], 35, 25)
+Controls.SetSize(G[5], 35, 25)
+Controls.SetSize(G[6], 35, 25)
+
+F[1] = Controls.AddButton("Fertig", 352.40, 223)
+F[2] = Controls.AddButton("Reset", 352.40, 248)
+F[3] = Controls.AddButton("Beenden",674, 573)
+Controls.SetSize(F[1], 45,24)
+Controls.SetSize(F[2], 45,24)
+
+' Knöpfe
+
+GraphicsWindow.PenColor = "black"
+GraphicsWindow.BrushColor = "gray"
+GraphicsWindow.FillRectangle(100, 50, 300, 450)
+GraphicsWindow.BrushColor = "#cce6f1"
+GraphicsWindow.FillRectangle(130, 90, 220, 370)
+GraphicsWindow.DrawRectangle(130, 90, 220, 370)
+GraphicsWindow.DrawRectangle(100, 50, 300, 450)
+
+GraphicsWindow.BrushColor = "#6a6e6e"
+GraphicsWindow.FillRectangle(131, 150, 218, 10)
+GraphicsWindow.FillRectangle(131, 230, 218, 10)
+GraphicsWindow.FillRectangle(131, 310, 218, 10)
+GraphicsWindow.DrawRectangle(131, 150, 218, 10)
+GraphicsWindow.DrawRectangle(131, 230, 218, 10)
+GraphicsWindow.DrawRectangle(131, 310, 218, 10)
+
+GraphicsWindow.FillRectangle(130, 390, 220, 70)
+GraphicsWindow.BrushColor = "lightblue"
+GraphicsWindow.FillRectangle(150, 405, 180, 40)
+GraphicsWindow.DrawRectangle(150, 405, 180, 40)
+GraphicsWindow.DrawRectangle(130, 390, 220, 70)
+
+GraphicsWindow.BrushColor = "Black"
+Eingabe = Shapes.AddText("Wähle ein Getränk aus")
+Moneten = Shapes.AddText("So viel Geld hast du eingeworfen " + Euro )
+Shapes.Move(Eingabe, 180, 540)
+Shapes.Move(Moneten, 440, 540)
+
+' Automat selber
+
+Loop:
+
+Program.Delay(5)
+
+If Getränk = 1 then
+  Shapes.SetText(Eingabe, "Getränk 1 Kostet 2,30€")
+elseif Getränk = 2 then  
+  Shapes.SetText(Eingabe, "Getränk 2 Kostet 1,70€")
+elseif Getränk = 3 then
+  Shapes.SetText(Eingabe, "Getränk 3 Kostet 1,95€")
+elseif Getränk = 4 then  
+  Shapes.SetText(Eingabe, "Getränk 4 Kostet 2,15€")
+elseif Getränk = 5 then
+  Shapes.SetText(Eingabe, "Getränk 5 Kostet 1,40€")
+elseif Getränk = 6 then
+  Shapes.SetText(Eingabe, "Getränk 6 Kostet 1,85€")
+  EndIf
+  
+  if Geld = 1 then 
+    Euro = Euro + 2
+    Shapes.SetText(Moneten,"So viel Geld hast du eingeworfen " + Euro )
+    Geld = 0
+  ElseIf Geld = 2 then 
+    Euro = Euro + 1
+    Shapes.SetText(Moneten,"So viel Geld hast du eingeworfen " + Euro )
+    Geld = 0
+  ElseIf Geld = 3 then 
+    Euro = Euro + 0.50
+    Shapes.SetText(Moneten,"So viel Geld hast du eingeworfen " + Euro )
+    Geld = 0
+  ElseIf Geld = 4 then 
+    Euro = Euro + 0.20
+    Shapes.SetText(Moneten,"So viel Geld hast du eingeworfen " + Euro )
+    Geld = 0
+  ElseIf Geld = 5 then 
+    Euro = Euro + 0.10
+    Shapes.SetText(Moneten,"So viel Geld hast du eingeworfen " + Euro )
+    Geld = 0
+  ElseIf Geld = 6 then  
+    Euro = Euro + 0.05
+    Shapes.SetText(Moneten,"So viel Geld hast du eingeworfen " + Euro )
+    Geld = 0
+  EndIf
+
+Goto Loop
+
+'-----------------
+
+Sub Auswahl
+  last = Controls.LastClickedButton
+  fc = Math.GetRandomNumber(100)
+  If last = G[1] then 
+    Getränk = 1
+    Gä = 2.30
+  ElseIf last = G[2] then 
+    Getränk = 2
+    Gä = 1.70
+  ElseIf last = G[3] then 
+    Getränk = 3
+    Gä = 1.95
+  ElseIf last = G[4] then 
+    Getränk = 4
+    Gä = 2.15
+  ElseIf last = G[5] then 
+    Getränk = 5
+    Gä = 1.40
+  ElseIf last = G[6] then  
+    Getränk = 6
+    Gä = 1.85
+  EndIf
+    last2 = Controls.LastClickedButton
+    If last2 = E[2] then 
+    Geld = 1
+  ElseIf last2 = E[1] then 
+    Geld = 2
+  ElseIf last2 = E[50] then 
+    Geld = 3
+  ElseIf last2 = E[20] then 
+    Geld = 4
+  ElseIf last2 = E[10] then 
+    Geld = 5
+  ElseIf last2 = E[5] then  
+    Geld = 6
+  EndIf
+  last3 = Controls.LastClickedButton
+  If last3 = F[1] Then
+    Geldtest = Euro - Gä
+    eg = Getränk - Euro
+    If eg = 0 Then
+      Shapes.SetText(Eingabe, "Kein Getränk ausgewählt")
+      Shapes.SetText(Moneten, "Kein Geld eingeworfen")
+      EndIf
+    If Getränk = 0 Then
+      Shapes.SetText(Eingabe, "Kein Getränk ausgewählt")
+      Shapes.SetText(Moneten,"So viel Geld hast du eingeworfen " + Euro )
+      Goto End 
+    ElseIf Euro = 0 then
+      Shapes.SetText(Moneten, "Kein Geld eingeworfen")
+      Goto End
+    EndIf
+      If Geldtest < 0 Then
+      Euro = 0
+      Getränk = 0
+      Shapes.SetText(Moneten, "Zu wenig Geld Eingeworfen")
+      Zero()
+    ElseIf Geldtest = 0 then
+      If fc = 1 then  
+        Getränk = 0
+        Shapes.SetText(Eingabe, "Dein Getränk ist stecken geblieben")
+        Shapes.SetText(Moneten, "Kein Restgeld")
+        Goto End
+        EndIf
+      Shapes.SetText(Eingabe, "Du hast ein Getränk gekauft")
+      Shapes.SetText(Moneten, "Kein Restgeld")
+      Getränk = 0
+      Zero()
+    Else
+      Getränk = 0
+      Euro = Euro - Gä
+      If fc = 1 then
+        Getränk = 0
+        Zero()
+        Shapes.SetText(Eingabe, "Dein Getränk ist stecken geblieben")
+        Shapes.SetText(Moneten, "Dein Geld ebenso")
+        Goto End
+      EndIf
+      Shapes.SetText(Moneten, "Dein restgeld ist: " + Euro)
+      Shapes.SetText(Eingabe, "Du hast ein Getränk gekauft")
+      Zero()
+    EndIf
+  ElseIf last3 = F[2] then  
+    Getränk = 0
+    Zero()
+    Shapes.SetText(Moneten,"So viel Geld hast du eingeworfen " + Euro )
+    Shapes.SetText(Eingabe,"Wähle ein Getränk aus")
+  EndIf
+    If last3 = F[3] Then
+    GraphicsWindow.Title = "Beenden"
+    Program.Delay(300)
+    Program.End()
+  EndIf
+End:
+EndSub
+
+Sub Zero
+Euro = 0
+Euro = Euro + 1.15
+Euro = Euro - 1.15
+EndSub
